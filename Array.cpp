@@ -45,18 +45,10 @@ Array& Array::operator =(const Array& arr)
 
 int& Array::operator [](int index)
 {
-	try
-	{
-		if (index >= size || index < 0)
-			throw ArrayException();
-		else
-			return ptr[index];
-	}
-	catch (const ArrayException& e)
-	{
-		cout << "Error!" << endl;
-		return;
-	}
+	if (index >= size || index < 0)
+		throw ArrayException();
+	else
+		return ptr[index];
 }
 
 void Array::increaseCapacity(int newCapacity)
@@ -71,21 +63,14 @@ void Array::increaseCapacity(int newCapacity)
 
 void Array::insert(int index, int element)
 {
-	try
-	{
-		if (index < 0 || index > size)
-			throw ArrayException();
-		if (size == capacity)
-			increaseCapacity(size + 1);
-		for (int j = size - 1; j >= index; j--)
-			ptr[j + 1] = ptr[j];
-		size++;
-		ptr[index] = element;
-	}
-	catch (const ArrayException& e)
-	{
-		cout << "Error!" << endl;
-	}
+	if (index < 0 || index > size)
+		throw ArrayException();
+	if (size == capacity)
+		increaseCapacity(size + 1);
+	for (int j = size - 1; j >= index; j--)
+		ptr[j + 1] = ptr[j];
+	size++;
+	ptr[index] = element;
 }
 
 void Array::insert(int elem)
@@ -95,19 +80,12 @@ void Array::insert(int elem)
 
 void Array::remove(int& index)
 {
-	try
-	{
-		if (index < 0 && index >= size)
-			throw ArrayException();
-		for (int i = index; i < size - 1; i++)
-			ptr[i] = ptr[i + 1];
-		ptr[size - 1] = 0;
-		size--;
-	}
-	catch (const ArrayException& e)
-	{
-		cout << "Error!" << endl;
-	}
+	if (index < 0 && index >= size)
+		throw ArrayException();
+	for (int i = index; i < size - 1; i++)
+		ptr[i] = ptr[i + 1];
+	ptr[size - 1] = 0;
+	size--;
 }
 
 int Array::getSize() const
